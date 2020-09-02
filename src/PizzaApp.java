@@ -21,23 +21,12 @@ public class PizzaApp {
     private JButton exitButton;
     private JPanel mainPanel;
 
-//    final double smallCost = 6.99;
-//    final double mediumCost = 8.99;
-//    final double largeCost = 10.99;
-//    private double sausageCost = 1.49;
-//    private double pepperoniCost = 1.49;
-//    private double salamiCost = 1.49;
-//    private double olivesCost = 0.99;
-//    private double mushroomsCost = 0.99;
-//    private double anchoviesCost = 0.99;
-
     private double totalCost = 0;
     private double size;
     private double topping;
     private double toppingCost;
 
     ButtonGroup sizeRadioGroup;
-
 
     public PizzaApp() {
         price.setEditable(false);
@@ -51,9 +40,8 @@ public class PizzaApp {
             @Override
             public void actionPerformed(ActionEvent e) {
                 calculate(size, toppingCost);
-                System.out.println(totalCost);
-                System.out.println(toppingCost);
-
+//                System.out.println(totalCost);
+//                System.out.println(toppingCost);
                 price.setText("$ "+ totalCost);
             }
         });

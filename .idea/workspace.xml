@@ -4,7 +4,6 @@
     <list default="true" id="449c49b4-672d-4d51-b15c-b6b458118dd7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/PizzaApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PizzaApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/~$Pizza.docx" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,7 +74,7 @@
       <option name="presentableId" value="Default" />
       <updated>1598901386449</updated>
       <workItem from="1598901389472" duration="4917000" />
-      <workItem from="1599080886164" duration="3980000" />
+      <workItem from="1599080886164" duration="4179000" />
     </task>
     <servers />
   </component>
