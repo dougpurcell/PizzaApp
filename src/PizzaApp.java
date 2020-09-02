@@ -2,23 +2,31 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 public class PizzaApp {
+
     private JLabel sizeLabel;
+    private JLabel toppingsLabel;
+    private JLabel priceLabel;
+
     private JRadioButton sizeSmall;
     private JRadioButton sizeMed;
     private JRadioButton sizeLarge;
+
     private JCheckBox sausage;
     private JCheckBox pepperoni;
     private JCheckBox salami;
-    private JLabel toppingsLabel;
     private JCheckBox olives;
     private JCheckBox mushrooms;
     private JCheckBox anchovies;
+
     private JTextField price;
-    private JLabel priceLabel;
+
     private JButton calculateButton;
     private JButton exitButton;
+
     private JPanel mainPanel;
 
     private double totalCost = 0;
@@ -36,20 +44,21 @@ public class PizzaApp {
         sizeRadioGroup.add(sizeMed);
         sizeRadioGroup.add(sizeLarge);
 
-        calculateButton.addActionListener(new ActionListener() { // set calculate button to display the text
+        // set calculate button to display the text and run the calculation
+        calculateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 calculate(size, toppingCost);
-//                System.out.println(totalCost);
-//                System.out.println(toppingCost);
-                price.setText("$ "+ totalCost);
+                System.out.println(totalCost);
+                System.out.println(toppingCost);
+                price.setText("$ "+ String.format("%.2f", totalCost));
             }
         });
 
-        exitButton.addActionListener(new ActionListener() { // close the application
+        // clear all the options and reset the calculators.
+        exitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //TODO: Finish Exit.
                 toppingCost = 0;
                 totalCost = 0;
                 size = 0;
@@ -57,6 +66,7 @@ public class PizzaApp {
                 clearOptions();
             }
         });
+
         // Size radios
         sizeSmall.addActionListener(new ActionListener() { //add small price to total.
             @Override
@@ -70,58 +80,87 @@ public class PizzaApp {
                 setMedium();
             }
         });
-        sizeLarge.addActionListener(new ActionListener() { //add medium price to total.
+        sizeLarge.addActionListener(new ActionListener() { //add large price to total.
             @Override
             public void actionPerformed(ActionEvent e) {
                 setLarge();
             }
         });
-        // End size radios.
+        // End size radios
 
         // Start toppings checkboxes
-        sausage.addActionListener(new ActionListener() { //add medium price to total.
+        sausage.addItemListener(new ItemListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void itemStateChanged(ItemEvent e) {
                 setToppingOne();
-                toppingCalc(topping);
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    toppingCalc(topping);
+                }
+                else {
+                    toppingSubtract(topping);
+                }
             }
         });
-        pepperoni.addActionListener(new ActionListener() { //add medium price to total.
+        pepperoni.addItemListener(new ItemListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void itemStateChanged(ItemEvent e) {
                 setToppingOne();
-                toppingCalc(topping);
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    toppingCalc(topping);
+                }
+                else {
+                    toppingSubtract(topping);
+                }
             }
         });
-        salami.addActionListener(new ActionListener() { //add medium price to total.
+        salami.addItemListener(new ItemListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void itemStateChanged(ItemEvent e) {
                 setToppingOne();
-                toppingCalc(topping);
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    toppingCalc(topping);
+                }
+                else {
+                    toppingSubtract(topping);
+                }
             }
         });
-        olives.addActionListener(new ActionListener() { //add medium price to total.
+        olives.addItemListener(new ItemListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void itemStateChanged(ItemEvent e) {
                 setToppingTwo();
-                toppingCalc(topping);
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    toppingCalc(topping);
+                }
+                else {
+                    toppingSubtract(topping);
+                }
             }
         });
-        mushrooms.addActionListener(new ActionListener() { //add medium price to total.
+        mushrooms.addItemListener(new ItemListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void itemStateChanged(ItemEvent e) {
                 setToppingTwo();
-                toppingCalc(topping);
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    toppingCalc(topping);
+                }
+                else {
+                    toppingSubtract(topping);
+                }
             }
         });
-        anchovies.addActionListener(new ActionListener() { //add medium price to total.
+        anchovies.addItemListener(new ItemListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void itemStateChanged(ItemEvent e) {
                 setToppingTwo();
-                toppingCalc(topping);
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    toppingCalc(topping);
+                }
+                else {
+                    toppingSubtract(topping);
+                }
             }
         });
-        //TODO: calculator must remove toppings cost if checkbox is unchecked by user.
     }
 
     // Size setters
@@ -135,18 +174,25 @@ public class PizzaApp {
         return size = 10.99;
     }
     // End Size Setters
+
     // Start Toppings Setters
     public double setToppingOne() {
         return topping = 1.49;
     }
     public double setToppingTwo(){
-        return topping = .99;
+        return topping = 0.99;
     }
     // End Toppings Setters
 
     // Calculator to figure out topping total
     public double toppingCalc (double topping) {
         toppingCost = toppingCost + topping;
+        return toppingCost;
+    }
+
+    // Calculator for deselecting checkboxes so total stays right
+    public double toppingSubtract(double topping) {
+        toppingCost = toppingCost - topping;
         return toppingCost;
     }
 
@@ -166,6 +212,7 @@ public class PizzaApp {
         mushrooms.setSelected(false);
         anchovies.setSelected(false);
     }
+
     // Main
     public static void main(String[] args) {
         JFrame frame = new JFrame("Pizza App");
@@ -173,6 +220,5 @@ public class PizzaApp {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
-
     }
 }
